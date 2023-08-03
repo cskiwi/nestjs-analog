@@ -8,6 +8,4 @@ async function createApp(): Promise<INestApplication> {
   return app;
 }
 
-console.log('viteNodeApp');
-
 export const viteNodeApp = createApp();

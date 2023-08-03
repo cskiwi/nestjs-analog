@@ -9,7 +9,7 @@ export class AppService {
   }
 
   increment(): number {
-    this.count++;
+    this.count += 2;
     return this.count;
   }
 }

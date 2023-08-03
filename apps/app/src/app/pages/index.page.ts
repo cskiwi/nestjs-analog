@@ -8,12 +8,6 @@ import { NgIf } from '@angular/common';
   imports: [NgIf],
   providers: [CountService],
   template: `
-    <div>
-      <a href="https://analogjs.org/" target="_blank">
-        <img alt="Analog Logo" class="logo analog" src="/analog.svg" />
-      </a>
-    </div>
-
     <h2>Analog</h2>
 
     <h3>The fullstack meta-framework for Angular!</h3>

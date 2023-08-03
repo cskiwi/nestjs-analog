@@ -11,20 +11,32 @@ export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
 
+    ssr: {
+      noExternal: ['@analogjs/trpc'],
+    },
     build: {
       target: ['es2020'],
     },
+    
     plugins: [
-      analog(),
-      tsConfigPaths({
-        root: '../../',
-      }),
-      splitVendorChunkPlugin(),
-      ...VitePluginNode({
+      VitePluginNode({
         adapter: nestRequestAdapter,
         appPath: 'apps/app/src/server/main.ts',
         tsCompiler: 'swc',
       }),
+      analog({
+        nitro: {
+          preset: 'vercel',
+        },
+        prerender: {
+          routes: ['/', '/about'],
+        },
+      }),
+      tsConfigPaths({
+        root: '../../',
+      }),
+      splitVendorChunkPlugin(),
+      
     ],
     test: {
       globals: true,
