@@ -16,23 +16,24 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
-      ...VitePluginNode({
-        adapter: nestRequestAdapter,
-        appPath: 'src/server/main.ts',
-        tsCompiler: 'swc',
-        swcOptions: {},
-      }),
       analog({
         apiPrefix: '/api',
         nitro: {
           preset: 'vercel',
         },
+        ssr: false,
       }),
       tsConfigPaths({
         root: '../../',
       }),
       splitVendorChunkPlugin(),
+      VitePluginNode({
+        adapter: nestRequestAdapter,
+        appPath: 'src/server/main.ts',
+        appName: 'api',
+      }),
     ],
+
     test: {
       globals: true,
       environment: 'jsdom',

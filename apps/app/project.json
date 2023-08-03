@@ -15,6 +15,7 @@
       "options": {
         "main": "apps/app/src/main.ts",
         "configFile": "apps/app/vite.config.ts",
+        "logLevel": "info",
         "outputPath": "dist/apps/app/client"
       },
       "defaultConfiguration": "production",
