@@ -44,6 +44,7 @@
     ],
     "sharedGlobals": []
   },
+  "defaultProject": "app",
   "generators": {
     "@nx/angular:application": {
       "style": "css",
