@@ -10,6 +10,7 @@ import { nestRequestAdapter } from './nest-request-adapter';
 export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
+    root: 'apps/app',
 
     ssr: {
       noExternal: ['@analogjs/trpc'],
@@ -17,12 +18,12 @@ export default defineConfig(({ mode }) => {
     build: {
       target: ['es2020'],
     },
-    
+
     plugins: [
-      VitePluginNode({
+      ...VitePluginNode({
         adapter: nestRequestAdapter,
         appPath: 'apps/app/src/server/main.ts',
-        tsCompiler: 'swc',
+        tsCompiler: 'esbuild',
       }),
       analog({
         nitro: {
@@ -36,7 +37,6 @@ export default defineConfig(({ mode }) => {
         root: '../../',
       }),
       splitVendorChunkPlugin(),
-      
     ],
     test: {
       globals: true,

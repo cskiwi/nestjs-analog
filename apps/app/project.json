@@ -8,9 +8,9 @@
       "executor": "@nx/vite:build",
       "outputs": [
         "{options.outputPath}",
-        "dist/apps/app/.nitro",
-        "dist/apps/app/ssr",
-        "dist/apps/app/analog"
+        "{workspaceRoot}/dist/apps/app/.nitro",
+        "{workspaceRoot}/dist/apps/app/ssr",
+        "{workspaceRoot}/dist/apps/app/analog"
       ],
       "options": {
         "main": "apps/app/src/main.ts",
@@ -53,7 +53,7 @@
     },
     "test": {
       "executor": "@nx/vite:test",
-      "outputs": ["apps/app/coverage"]
+      "outputs": ["{projectRoot}/coverage"]
     },
     "lint": {
       "executor": "@nx/linter:eslint",

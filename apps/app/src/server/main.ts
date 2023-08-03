@@ -8,4 +8,14 @@ async function createApp(): Promise<INestApplication> {
   return app;
 }
 
+async function bootstrap() {
+  const app = await createApp();
+  app.init();
+  await app.listen(3000);
+}
+
+if (import.meta.env?.PROD) {
+  bootstrap();
+}
+
 export const viteNodeApp = createApp();
