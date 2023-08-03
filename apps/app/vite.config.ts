@@ -11,10 +11,6 @@ export default defineConfig(({ mode }) => {
   return {
     publicDir: 'src/public',
     root: 'apps/app',
-
-    ssr: {
-      noExternal: ['@analogjs/trpc'],
-    },
     build: {
       target: ['es2020'],
     },
@@ -22,15 +18,14 @@ export default defineConfig(({ mode }) => {
     plugins: [
       ...VitePluginNode({
         adapter: nestRequestAdapter,
-        appPath: 'apps/app/src/server/main.ts',
-        tsCompiler: 'esbuild',
+        appPath: 'src/server/main.ts',
+        tsCompiler: 'swc',
+        swcOptions: {},
       }),
       analog({
+        apiPrefix: '/api',
         nitro: {
           preset: 'vercel',
-        },
-        prerender: {
-          routes: ['/', '/about'],
         },
       }),
       tsConfigPaths({
