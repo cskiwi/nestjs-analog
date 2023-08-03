@@ -23,23 +23,23 @@ export class CountService {
   // selectors
   count = computed(() => this.state().count);
   status = computed(() => this.state().status);
-  error = computed(() => this.state().error); 
+  error = computed(() => this.state().error);
 
   // sources
   // articleLoaded$ = this.paramMap.pipe(
   //   switchMap((params) => this.apiService.getCountById(params.get("id")))
   // );
 
-  countLoaded$ = this.apiService.get<number>('/api');
+  countLoaded$ = this.apiService.get<{ count: number }>('/api');
   increment$ = new Subject<void>();
 
   constructor() {
     //  reducers
     this.countLoaded$.pipe(takeUntilDestroyed()).subscribe({
-      next: (count) =>
+      next: (result) =>
         this.state.update((state) => ({
           ...state,
-          count: count,
+          count: result.count,
           status: 'success',
           error: null,
         })),
@@ -53,11 +53,11 @@ export class CountService {
         status: 'loading',
         error: null,
       }));
-      this.apiService.get<number>('/api/increment').subscribe({
-        next: (count) =>
+      this.apiService.get<{ count: number }>('/api/increment').subscribe({
+        next: (result) =>
           this.state.update((state) => ({
             ...state,
-            count,
+            count: result.count,
             status: 'success',
             error: null,
           })),

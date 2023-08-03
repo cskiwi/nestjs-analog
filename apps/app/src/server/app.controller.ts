@@ -6,12 +6,16 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  getCount(): string {
-    return this.appService.getCount().toString();
+  getCount() {
+    return {
+      count: this.appService.getCount(),
+    };
   }
 
   @Get('increment')
-  increment(): number {
-    return this.appService.increment();
+  increment() {
+    return {
+      count: this.appService.increment(),
+    };
   }
 }
