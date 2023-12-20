@@ -16,21 +16,18 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
-      ...VitePluginNode({
-        adapter: nestRequestAdapter,
+      VitePluginNode({
+        adapter: 'nest',
         appPath: 'src/server/main.ts',
         appName: 'api',
       }),
-      ...analog({
-        nitro: {
-          preset: 'vercel',
-        },
-        ssr: false,
-      }),
+      // analog({
+      //   apiPrefix: 'api',
+      // }),
       tsConfigPaths({
         root: '../../',
       }),
-     
+
       splitVendorChunkPlugin(),
     ],
 
