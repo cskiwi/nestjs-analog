@@ -16,14 +16,16 @@ export default defineConfig(({ mode }) => {
     },
 
     plugins: [
-      VitePluginNode({
-        adapter: 'nest',
-        appPath: 'src/server/main.ts',
-        appName: 'api',
+      !process.env['BROWSER']
+        ? VitePluginNode({
+            adapter: nestRequestAdapter,
+            appPath: 'src/server/main.ts',
+            appName: 'api',
+          })
+        : false,
+      analog({
+        ssr: false,
       }),
-      // analog({
-      //   apiPrefix: 'api',
-      // }),
       tsConfigPaths({
         root: '../../',
       }),
